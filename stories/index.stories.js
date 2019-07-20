@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
@@ -19,5 +20,5 @@ storiesOf('Button', module)
         </Button>
     ));
 
-storiesOf('Form', module)
-    .add('Checkbox', () => <Radiobox />)
+// storiesOf('Form', module)
+//     .add('Checkbox', () => <Radiobox />)

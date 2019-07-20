@@ -1,52 +1,60 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 const RadiboxContainer = styled.ul`
     & li {
-        color: #AAAAAA;
+        color: ${props => props.color || `#aaaaaa`};
         display: block;
         position: relative;
         float: left;
         width: 100%;
         height: 100%;
     }
+
     & li input[type=radio] {
         position: absolute;
         visibility: hidden;
     }
+
     & li label{
         display: block;
         position: relative;
         font-weight: 300;
-        font-size: 1.35em;
-        padding: 25px 25px 25px 80px;
-        margin: 10px auto;
+        font-size: 1em;
+        padding: ${props => `5px 25px 5px ${props.paddingLeft}` || `5px 25px 5px 80px`} ;
         height: 30px;
+        text-align: left;
         z-index: 9;
         cursor: pointer;
         -webkit-transition: all 0.25s linear;
     }
 
     & li:hover label{
-        color: #000;
+        color: ${props => props.hoverColor || `#000`};
     }
 
     & li .check{
         display: block;
         position: absolute;
-        border: 5px solid #AAAAAA;
+        border-width: 2px;
+        border-style: solid;
+        border-color: ${props => props.color || `#AAAAAA`};
         border-radius: 100%;
-        height: 25px;
-        width: 25px;
-        top: 30px;
-        left: 20px;
+
+        height: ${props => `${props.fontSize}` || "1rem"};
+        width: ${props => `${props.fontSize}` || "1rem"};
+        top: 10px;
+        left: 0px;
         z-index: 5;
         transition: border .25s linear;
         -webkit-transition: border .25s linear;
     }
 
     & li:hover .check {
-        border: 5px solid #000;
+        border-width: 2px;
+        border-style: solid;
+        border-color: ${props => props.hoverColor || `#000`};
     }
 
     & li .check::before {
@@ -54,135 +62,68 @@ const RadiboxContainer = styled.ul`
         position: absolute;
         content: '';
         border-radius: 100%;
-        height: 15px;
-        width: 15px;
-        top: 5px;
-        left: 5px;
+        height: 12px;
+        width: 12px;
+        top: 2px;
+        left: 2px;
         margin: auto;
         transition: background 0.25s linear;
         -webkit-transition: background 0.25s linear;
     }
 
     & input[type=radio]:checked ~ .check {
-        border: 5px solid #0DFF92;
+        border-width: 2px;
+        border-style: solid;
+        border-color: ${props => props.selectedColor || `#61dafb`};
     }
 
     & input[type=radio]:checked ~ .check::before{
-    background: #0DFF92;
+        background: ${props => props.selectedColor || `#61dafb`};;
     }
 
     & input[type=radio]:checked ~ label{
-        color: #0DFF92;
+        color: ${props => props.selectedColor || `#61dafb`};;
     }
-
-    & .signature {
-        margin: 10px auto;
-        padding: 10px 0;
-        width: 100%;
-    }
-
-    & .signature p{
-        text-align: center;
-        font-family: Helvetica, Arial, Sans-Serif;
-        font-size: 0.85em;
-        color: #AAAAAA;
-    }
-
-    & .signature .much-heart{
-        display: inline-block;
-        position: relative;
-        margin: 0 4px;
-        height: 10px;
-        width: 10px;
-        background: #AC1D3F;
-        border-radius: 4px;
-        -ms-transform: rotate(45deg);
-        -webkit-transform: rotate(45deg);
-        transform: rotate(45deg);
-    }
-
-    & .signature .much-heart::before,
-    & .signature .much-heart::after {
-        display: block;
-        content: '';
-        position: absolute;
-        margin: auto;
-        height: 10px;
-        width: 10px;
-        border-radius: 5px;
-        background: #AC1D3F;
-        top: -4px;
-    }
-
-    & .signature .much-heart::after {
-        bottom: 0;
-        top: auto;
-        left: -4px;
-    }
-
-    & .signature a {
-        color: #AAAAAA;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-
-    /* Styles for alert...
-    by the way it is so weird when you look at your code a couple of years after you wrote it XD */
-
-    & .alert {
-        box-sizing: border-box;
-        background-color: #0DFF92;
-        width: 100%;
-        position: relative;
-        top: 0;
-        left: 0;
-        z-index: 300;
-        padding: 20px 40px;
-        color: #333;
-    }
-
-    & .alert h2 {
-        font-size: 22px;
-        color: #232323;
-        margin-top: 0;
-    }
-
-    & .alert p {
-        line-height: 1.6em;
-        font-size:18px;
-    }
-
-    & .alert a {
-        color: #232323;
-        font-weight: bold;
-    }
-
 `
-const Radiobox = () => {
-    return (
-        <div class="container">
-            <h2>Tomorrow I want some:</h2>
-            <RadiboxContainer>
-                <li>
-                    <input type="radio" id="f-option" name="selector" />
-                    <label for="f-option">Pizza</label>
-                    <div class="check"></div>
-                </li>
-                <li>
-                    <input type="radio" id="s-option" name="selector" />
-                    <label for="s-option">Bacon</label>
 
-                    <div class="check"><div class="inside"></div></div>
-                </li>
-                <li>
-                    <input type="radio" id="t-option" name="selector" />
-                    <label for="t-option">Cats</label>
-                    <div class="check"><div class="inside"></div></div>
-                </li>
+const Options = (props) => {
+    return props.options.map((opt, index) => {
+        return (
+            <li key={index}>
+                <input type="radio" id={index} name="selector" />
+                <label htmlFor={index}>{opt.label}</label>
+                <div className="check"></div>
+            </li>
+        )
+    })
+}
+
+const Radiobox = (props) => {
+    const { paddingLeft, fontSize, options, color, hoverColor, selectedColor } = props;
+    return (
+        <div className="container">
+            <RadiboxContainer
+                paddingLeft={paddingLeft}
+                fontSize={fontSize}
+                hoverColor={hoverColor}
+                selectedColor={selectedColor}
+                color={color}
+            >
+                <Options
+                    options={options}
+                />
             </RadiboxContainer>
         </div>
     )
+}
+
+Radiobox.propTypes = {
+    color: PropTypes.string,
+    selectedColor: PropTypes.string,
+    hoverColor: PropTypes.string,
+    paddingLeft: PropTypes.string,
+    fontSize: PropTypes.string,
+    options: PropTypes.array
 }
 
 export default Radiobox;
