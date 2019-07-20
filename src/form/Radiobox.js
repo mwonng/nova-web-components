@@ -7,7 +7,7 @@ const RadiboxContainer = styled.ul`
         color: ${props => props.color || `#aaaaaa`};
         display: block;
         position: relative;
-        float: left;
+        /* float: left; */
         width: 100%;
         height: 100%;
     }
@@ -23,10 +23,10 @@ const RadiboxContainer = styled.ul`
         font-weight: 300;
         font-size: 1em;
         padding: ${props => `5px 25px 5px ${props.paddingLeft}` || `5px 25px 5px 80px`} ;
-        height: 30px;
         text-align: left;
         z-index: 9;
         cursor: pointer;
+        transition: all 0.25s linear;
         -webkit-transition: all 0.25s linear;
     }
 
@@ -41,10 +41,9 @@ const RadiboxContainer = styled.ul`
         border-style: solid;
         border-color: ${props => props.color || `#AAAAAA`};
         border-radius: 100%;
-
         height: ${props => `${props.fontSize}` || "1rem"};
         width: ${props => `${props.fontSize}` || "1rem"};
-        top: 10px;
+        top: 5px;
         left: 0px;
         z-index: 5;
         transition: border .25s linear;
@@ -101,19 +100,17 @@ const Options = (props) => {
 const Radiobox = (props) => {
     const { paddingLeft, fontSize, options, color, hoverColor, selectedColor } = props;
     return (
-        <div className="container">
-            <RadiboxContainer
-                paddingLeft={paddingLeft}
-                fontSize={fontSize}
-                hoverColor={hoverColor}
-                selectedColor={selectedColor}
-                color={color}
-            >
-                <Options
-                    options={options}
-                />
-            </RadiboxContainer>
-        </div>
+        <RadiboxContainer
+            paddingLeft={paddingLeft}
+            fontSize={fontSize}
+            hoverColor={hoverColor}
+            selectedColor={selectedColor}
+            color={color}
+        >
+            <Options
+                options={options}
+            />
+        </RadiboxContainer>
     )
 }
 

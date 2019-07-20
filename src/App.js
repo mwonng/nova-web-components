@@ -1,15 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import Radiobox from './form/Radiobox'
+import styled from 'styled-components';
+
+const PlayGround = styled.div`
+    position: relative;
+    background: #f0f0f0;
+    min-height: 400px;
+    margin: auto;
+    padding: 40px;
+`
+
+const Container = styled.div`
+    width: 80%;
+    background: #fff;
+    max-width: 600px;
+    width: 100%;
+    min-height: 300px;
+    margin: auto;
+    padding: 50px;
+    border: #ddd 1px solid;
+    border-radius: 5px;
+`
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
+        <PlayGround>
+            <Container>
                 <Radiobox
-                    color={'white'}
+                    color={'#aaa'}
                     selectedColor={''}
                     hoverColor={''}
                     paddingLeft={'35px'}
@@ -25,19 +43,8 @@ function App() {
                         }
                     ]}
                 />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
+            </Container>
+        </PlayGround>
     );
 }
 
