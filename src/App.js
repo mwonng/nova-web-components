@@ -1,6 +1,7 @@
 import React from 'react';
-import Radiobox from './form/Radiobox'
 import styled from 'styled-components';
+import Radiobox from './form/Radiobox'
+import Select from './form/Select'
 
 const PlayGround = styled.div`
     position: relative;
@@ -40,6 +41,32 @@ function App() {
                         {
                             label: 'Dogs',
                             value: 'dogs'
+                        }
+                    ]}
+                />
+                <Select
+                    disabled={false}
+                    defaultValue={'1'}
+                    options={[
+                        {
+                            label: "This is a native select element",
+                            value: "0"
+                        },
+                        {
+                            label: "Apples",
+                            value: "1"
+                        },
+                        {
+                            label: "Bananas",
+                            value: "2"
+                        },
+                        {
+                            label: "Grapes",
+                            value: "3"
+                        },
+                        {
+                            label: "Oranges",
+                            value: "4"
                         }
                     ]}
                 />
